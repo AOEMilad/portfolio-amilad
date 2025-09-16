@@ -9,6 +9,13 @@ type ContactBody = { name: string; email: string; message: string };
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
+  
+  // add this near the top of POST:
+  if (!process.env.RESEND_API_KEY || !process.env.CONTACT_FROM || !process.env.CONTACT_TO) {
+    return NextResponse.json({ ok: false, error: "Email not configured" }, { status: 501 });
+  }
+
+
   try {
     const { name, email, message } = (await req.json()) as Partial<ContactBody>;
 
