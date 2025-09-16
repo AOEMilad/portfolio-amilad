@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import { ContactProvider } from "./components/contact-context";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -10,20 +10,15 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio - AM",
-  description: "This is my portfolio.",
+  title: "Anthony Milad - Automation ",
+  description: "Automations that remove repetitive steps from your work.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode; }) {
   return (
     <html lang="en">
-      <body className={`${montserrat.variable} antialiased`}>
-        <Navbar/>
-        {children}
+      <body className={`${montserrat.variable}`}>
+        <ContactProvider>{children}</ContactProvider>
       </body>
     </html>
   );

@@ -1,17 +1,25 @@
-//import Image from "next/image";
+import Navbar from "./components/Navbar";
+import Hero from "./components/Hero";
+import Services from "./components/Services";
+import Pricing from "./components/Pricing";
+import Work from "./components/Work";
+import About from "./components/About";
+import Footer from "./components/Footer";
+import ContactSheet from "./components/ContactSheet";
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div>
-          <p>HERE I WILL EMBARK ON A SWE JOURNEY (Netflix if you see this I am coming for you :P)</p>
-        </div>
+    <>
+      <Navbar />
+      <Hero />
+      <main>
+        <Services />
+        <Pricing />
+        <Work />
+        <About />
       </main>
-
-
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-      </footer>
-    </div>
+      <Footer />
+      <ContactSheet /> {/* modal lives at root so it overlays everything */}
+    </>
   );
 }

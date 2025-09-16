@@ -1,97 +1,71 @@
-'use client'
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { useContact } from "./contact-context";
 
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { setOpen } = useContact();
 
   return (
-    <nav className="fixed top-2 w-full z-50 bg-black md:bg-transparent">
-      <div className="container mx-auto">
-        <div className="bg-black border-2 border-white rounded-xl flex items-center px-8">
-          {/* Clickable Logo/Image */}
-          <Link href="/">
-            <Image src="/img/Gojo.png" width={64} height={64} alt="Logo" className="h-16 w-auto cursor-pointer" />
-          </Link>
+    <header className="fixed top-0 left-0 right-0 z-40 backdrop-blur-sm bg-[var(--dark)]/40 border-b border-[var(--brown)]/40">
+      <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
+        <a href="#home" className="tracking-wide text-xl md:text-2xl text-[var(--vanilla)]">
+          Anthony Milad
+        </a>
 
-          {/* Desktop Menu */}
-          <ul className="hidden md:flex flex-1 justify-center space-x-8 text-lg">
-            <li>
-              <Link href="/" className="text-white hover:border-2 hover:border-white p-3 rounded-sm">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/MiladDB" className="text-white hover:border-2 hover:border-white p-3 rounded-sm">
-                MiladDB
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className="text-white hover:border-2 hover:border-white p-3 rounded-sm">
-                Coming Soon
-              </Link>
-            </li>
-            <li>
-              <Link href="/" className="text-white hover:border-2 hover:border-white p-3 rounded-sm">
-              Coming Soon
-              </Link>
-            </li>
-          </ul>
-
-          {/* Mobile Menu Toggle Button */}
+        <nav className="hidden md:flex items-center gap-8 text-sm">
+          <a href="#services" className="hover:text-[var(--gold)] transition">Services</a>
+          <a href="#pricing"  className="hover:text-[var(--gold)] transition">Pricing</a>
+          <a href="#work"     className="hover:text-[var(--gold)] transition">Work</a>
+          <a href="#about"    className="hover:text-[var(--gold)] transition">About</a>
+          <a href="/portfolio"    className="hover:text-[var(--gold)] transition">Portfolio</a>
           <button
-            onClick={toggleMenu}
-            className="md:hidden text-white focus:outline-none ml-auto"
+            onClick={() => setOpen(true)}
+            className="rounded-2xl px-4 py-2 bg-[var(--gold)] text-[var(--dark)] font-medium shadow"
           >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16m-7 6h7"}
-              />
-            </svg>
+            Contact
           </button>
-        </div>
+        </nav>
+
+        <button
+          className="md:hidden p-2 rounded-lg border border-[var(--brown)]/50"
+          onClick={() => setMenuOpen(v => !v)}
+          aria-label="Toggle menu"
+        >
+          <div className="w-5 h-0.5 bg-[var(--beige)] mb-1" />
+          <div className="w-5 h-0.5 bg-[var(--beige)] mb-1" />
+          <div className="w-5 h-0.5 bg-[var(--beige)]" />
+        </button>
       </div>
-      
 
-      {/* Mobile Menu */}
-      <ul className={`md:hidden p-6 flex flex-col items-center space-y-4 mt-4 ${isOpen ? 'block' : 'hidden'}`}>
-        <li>
-          <Link href="/" className="text-white hover:text-gray-300">
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link href="/MainPage/Task-Manager" className="text-white hover:text-gray-300">
-            Task Manager
-          </Link>
-        </li>
-        <li>
-          <Link href="/MainPage/Groceries" className="text-white hover:text-gray-300">
-            Groceries
-          </Link>
-        </li>
-        <li>
-          <Link href="/MainPage/Link4" className="text-white hover:text-gray-300">
-            App4
-          </Link>
-        </li>
-      </ul>
-    </nav>
+      {menuOpen && (
+        <div className="md:hidden border-t border-[var(--brown)]/40 bg-[var(--dark)]/95">
+          <div className="px-6 py-4 flex flex-col text-lg">
+            {[
+              ["Services", "#services"],
+              ["Pricing",  "#pricing"],
+              ["Work",     "#work"],
+              ["About",    "#about"],
+              ["Portfolio","/portfolio"],
+            ].map(([label, href]) => (
+              <a
+                key={label}
+                href={href}
+                className="py-3 border-b border-[var(--brown)]/30"
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
+            <button
+              onClick={() => { setMenuOpen(false); setOpen(true); }}
+              className="mt-4 rounded-xl px-4 py-3 bg-[var(--gold)] text-[var(--dark)] font-medium"
+            >
+              Contact
+            </button>
+          </div>
+        </div>
+      )}
+    </header>
   );
-};
-
-export default Navbar;
+}
