@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Poppins } from "next/font/google";
+import { Montserrat } from "next/font/google"; // Poppins - use it later
 import "./globals.css";
 import { ContactProvider } from "./components/contact-context";
 
