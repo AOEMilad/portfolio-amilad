@@ -68,3 +68,121 @@ html, body {
   mix-blend-mode: screen;
   opacity: .25;
 }
+
+
+
+
+
+
+/* Glossy Button */
+.glossy-btn {
+  --blur: 22px;               /* overall blur baseline */
+  --edge-strength: 0.55;      /* 0..1: how much extra blur at the rim */
+  --bg-alpha: 0.10;           /* glass tint strength */
+  --radius: 9999px;           /* pill */
+  --outline: rgba(255,255,255,0.26);
+  --inner-line: rgba(255,255,255,0.10);
+  --shadow: rgba(0,0,0,0.35);
+  --text: rgba(255,255,255,0.92);
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-weight: 600;
+  letter-spacing: .2px;
+  border: 1px solid var(--outline);
+
+  /* base glass */
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02)) /* subtle vertical tint */,
+    rgba(255,255,255,var(--bg-alpha));
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(125%);
+  backdrop-filter: blur(var(--blur)) saturate(125%);
+
+  /* depth */
+  box-shadow:
+    0 10px 30px var(--shadow),
+    inset 0 1px 0 var(--inner-line);
+
+  isolation: isolate; /* so blends don’t leak out */
+}
+
+/* EDGE-BLUR: extra blur only near the rim */
+.glossy-btn::before {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+
+  -webkit-backdrop-filter: blur(calc(var(--blur) * (1 + var(--edge-strength))));
+  backdrop-filter: blur(calc(var(--blur) * (1 + var(--edge-strength))));
+
+  /* mask = only show this extra blur at the edges */
+  /* Safari needs the webkit version */
+  -webkit-mask: radial-gradient(
+      100% 100% at 50% 50%,
+      transparent 58%,
+      black 78%
+  );
+  mask: radial-gradient(100% 100% at 50% 50%, transparent 58%, black 78%);
+
+  pointer-events: none;
+  z-index: -1; /* behind content but above page */
+}
+
+/* SPECULAR HIGHLIGHTS (top & bottom soft bars) + subtle inner rim */
+.glossy-btn::after {
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(255,255,255,0.45), transparent 60%),
+    radial-gradient(120% 60% at 50% 110%, rgba(255,255,255,0.18), transparent 60%),
+    conic-gradient(from 180deg at 50% 50%,
+      rgba(255,255,255,0.18) 0deg,
+      transparent 60deg 300deg,
+      rgba(255,255,255,0.18) 360deg);
+  mix-blend-mode: screen;
+  opacity: .7;
+  pointer-events: none;
+}
+
+/* CHROMATIC EDGE GLOW (super subtle) */
+.glossy-btn .label {
+  position: relative;
+  z-index: 1;
+  text-shadow:
+    0 0 .5px rgba(255,255,255,0.8),
+    0 .5px 1px rgba(0,0,0,0.25);
+}
+.glossy-btn::marker { content: ""; } /* keep lists happy */
+
+/* two tiny outer glows to mimic aberration on rim */
+.glossy-btn {
+  box-shadow:
+    0 10px 30px var(--shadow),
+    inset 0 1px 0 var(--inner-line),
+    0 0 0.6px rgba(0,180,255,0.65),   /* cyan halo */
+    0 0 1.2px rgba(255,90,0,0.45);    /* warm halo */
+}
+
+/* MOVING SHEEN (optional) */
+.glossy-btn .sheen {
+  position: absolute; inset: -2px; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(110deg,
+      transparent 20%,
+      rgba(255,255,255,0.35) 40%,
+      transparent 60%);
+  transform: translateX(-140%);
+  animation: sheen-move 3.2s linear infinite;
+  opacity: .7;
+  mix-blend-mode: screen;
+}
+@keyframes sheen-move {
+  0% { transform: translateX(-140%); }
+  60% { transform: translateX(140%); }
+  100% { transform: translateX(140%); }
+}

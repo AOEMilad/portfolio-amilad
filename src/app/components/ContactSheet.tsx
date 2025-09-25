@@ -44,6 +44,7 @@ export default function ContactSheet() {
           <form className="mt-4 grid gap-4" onSubmit={onSubmit}>
             <input className="rounded-xl bg-black/20 border border-[var(--brown)]/50 px-4 py-3" name="name" placeholder="Name" required />
             <input className="rounded-xl bg-black/20 border border-[var(--brown)]/50 px-4 py-3" name="email" placeholder="Email" type="email" required />
+            {/*<input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" /> this is a honeypot*/}
             <textarea className="rounded-xl bg-black/20 border border-[var(--brown)]/50 px-4 py-3" name="message" rows={4} placeholder="What would you like to automate?" required />
             <button disabled={loading} className="rounded-2xl px-5 py-3 bg-[var(--gold)] text-[var(--dark)] font-medium">
               {loading ? "Sending..." : "Send"}

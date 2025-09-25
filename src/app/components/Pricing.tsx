@@ -1,4 +1,5 @@
 import GlassPanel from "./GlassPanel";
+import GlossyButton from "./GlossyButton";
 
 export default function Pricing() {
   const fixed = [
@@ -24,6 +25,13 @@ export default function Pricing() {
               Most small automations land in the $500–$2,500 range; ongoing support available.
             </p>
           </div>
+
+          
+          <GlossyButton >
+            iMessage-ish
+          </GlossyButton>
+          
+
           <div className="bg-[var(--brown)]/40 p-8 md:p-12">
             <p className="text-center">
               One-Off Fixed Price
