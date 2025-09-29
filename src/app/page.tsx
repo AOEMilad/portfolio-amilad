@@ -14,7 +14,9 @@ export default function Page() {
       <Hero />
       <main>
         <Services />
+        {/*
         <Pricing />
+        */}
         <Work />
         <About />
       </main>

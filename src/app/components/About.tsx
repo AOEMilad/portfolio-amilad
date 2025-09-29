@@ -77,8 +77,8 @@ export default function About() {
             Request a quote
           </button>
           <a
-            href="/resume.pdf"
-            download="resume.pdf"
+            href="/Anthony_Milad_Resume.pdf"
+            download="Anthony_Milad_Resume.pdf"
             className="rounded-2xl px-5 py-3 border border-[var(--line)]"
           >
             Download resume

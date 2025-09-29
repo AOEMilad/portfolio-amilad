@@ -15,7 +15,11 @@ export default function Navbar() {
 
         <nav className="hidden md:flex items-center gap-8 text-sm">
           <a href="#services" className="hover:text-[var(--gold)] transition">Services</a>
+          
+          {/*
           <a href="#pricing"  className="hover:text-[var(--gold)] transition">Pricing</a>
+          */}
+          
           <a href="#work"     className="hover:text-[var(--gold)] transition">Work</a>
           <a href="#about"    className="hover:text-[var(--gold)] transition">About</a>
           <a href="/portfolio"    className="hover:text-[var(--gold)] transition">Portfolio</a>

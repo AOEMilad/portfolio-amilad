@@ -169,20 +169,4 @@ html, body {
     0 0 1.2px rgba(255,90,0,0.45);    /* warm halo */
 }
 
-/* MOVING SHEEN (optional) */
-.glossy-btn .sheen {
-  position: absolute; inset: -2px; border-radius: inherit; pointer-events: none;
-  background: linear-gradient(110deg,
-      transparent 20%,
-      rgba(255,255,255,0.35) 40%,
-      transparent 60%);
-  transform: translateX(-140%);
-  animation: sheen-move 3.2s linear infinite;
-  opacity: .7;
-  mix-blend-mode: screen;
-}
-@keyframes sheen-move {
-  0% { transform: translateX(-140%); }
-  60% { transform: translateX(140%); }
-  100% { transform: translateX(140%); }
-}
+
