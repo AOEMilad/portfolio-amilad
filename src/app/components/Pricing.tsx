@@ -1,5 +1,5 @@
 import GlassPanel from "./GlassPanel";
-import GlossyButton from "./GlossyButton";
+{/*import GlossyButton from "./GlossyButton";*/}
 
 export default function Pricing() {
   const fixed = [
