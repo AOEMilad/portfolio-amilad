@@ -20,9 +20,15 @@ export default function Hero() {
           <a href="#services" className="rounded-2xl px-5 py-3 bg-[var(--gold)] text-[var(--dark)] font-medium shadow">
             Explore Services
           </a>
+          <a href="#work" className="rounded-2xl px-5 py-3 border border-[var(--beige)]/50 hover:bg-white/5">
+            View My Work
+          </a>
+          {/*
           <a href="#pricing" className="rounded-2xl px-5 py-3 border border-[var(--beige)]/50 hover:bg-white/5">
             View Pricing
+            View My Work
           </a>
+          */}
         </div>
       </div>
     </section>
